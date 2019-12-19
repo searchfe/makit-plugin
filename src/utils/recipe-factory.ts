@@ -1,6 +1,7 @@
-import { Context, RecipeDeclaration } from "makit";
-import { resolve } from 'path';
-const extglob = require('extglob')
+import {resolve} from 'path';
+import {Context, RecipeDeclaration} from 'makit';
+
+const extglob = require('extglob');
 const matcher = require('matcher');
 
 /**
@@ -11,7 +12,7 @@ const matcher = require('matcher');
 export function recipeFactory<O, C>(recipeImpl: RecipeImpl<O, C>, options: O = {} as O, configs?: (C & RecipeImplConfig)[]): RecipeDeclaration {
     const matchKeys: {[index: string]: boolean} = {};
     Object.keys(options).forEach(key => {
-        if(typeof options[key] === 'string' && options[key].match(/\$\d/)) {
+        if (typeof options[key] === 'string' && options[key].match(/\$\d/)) {
             matchKeys[key] = true;
         }
     });
@@ -19,23 +20,22 @@ export function recipeFactory<O, C>(recipeImpl: RecipeImpl<O, C>, options: O = {
         return (context: Context) => {
             const conf = configs ? pickConfig(configs, context.targetPath(), '**/', '**') : undefined;
             return recipeImpl({
-                target: context.targetPath(),
-                dep: context.dependencyPath(),
-                make: context.make.bind(context),
+                'target': context.targetPath(),
+                'dep': context.dependencyPath(),
+                'make': context.make.bind(context),
                 ...(makeOptions(matchKeys, options, context) as any)
             }, conf);
-        }
-    } else {
-        return (context: Context, done: any) => {
-            const conf = configs ? pickConfig(configs, context.targetPath(), '**/', '**') : undefined;
-            return recipeImpl({
-                target: context.targetPath(),
-                dep: context.dependencyPath(),
-                make: context.make.bind(context),
-                ...(makeOptions(matchKeys, options, context) as any)
-            }, conf, done);
-        }
+        };
     }
+    return (context: Context, done: any) => {
+        const conf = configs ? pickConfig(configs, context.targetPath(), '**/', '**') : undefined;
+        return recipeImpl({
+            'target': context.targetPath(),
+            'dep': context.dependencyPath(),
+            'make': context.make.bind(context),
+            ...(makeOptions(matchKeys, options, context) as any)
+        }, conf, done);
+    };
 }
 
 function makeOptions<O>(matchKeys, options: O, context: Context) {
@@ -44,15 +44,15 @@ function makeOptions<O>(matchKeys, options: O, context: Context) {
         if (matchKeys[key]) {
             newOptions[key] = options[key].replace(/\$(\d+)/g, (all, index) => {
                 return context.match[index];
-            })
-        } else {
+            });
+        }
+        else {
             newOptions[key] = options[key];
         }
     });
     return newOptions;
 }
-export type  RecipeImpl<Option, Config> = (options: Option & RecipeImplOption, config?: Config, done?: any ) => (void | Promise<void>);
-
+export type RecipeImpl<Option, Config> = (options: Option & RecipeImplOption, config?: Config, done?: any) => (void | Promise<void>);
 
 interface RecipeImplOption {
     target: string
@@ -68,11 +68,11 @@ interface RecipeImplConfig {
 /** 从配置中匹配符合filePath的配置 */
 export function pickConfig<T extends Option>(configs: (T & RecipeImplConfig)[], filePath: string, baseFolder: string = '', subfix: string = ''): T {
     let config : Option | undefined;
-    for(let i = configs.length -1; i >=0; i--) {
+    for (let i = configs.length - 1; i >= 0; i--) {
         const target = resolve(baseFolder, configs[i].file + subfix);
         if (configs[i].file.indexOf('(') > -1) {
             // Matching Mode
-            const reg  = new RegExp('^' + extglob(target).replace(/\(\?:/g, '(') + '$');
+            const reg = new RegExp('^' + extglob(target).replace(/\(\?:/g, '(') + '$');
             const matches = reg.exec(filePath);
             if (matches) {
                 /** 这里只是浅拷贝，一层生效 */
@@ -81,14 +81,14 @@ export function pickConfig<T extends Option>(configs: (T & RecipeImplConfig)[], 
                     (config as any)[key] = (config as any)[key].replace(/\$(\d+)/g, (all, index) => {
                         if (matches[index]) {
                             return matches[index];
-                        } else {
-                            return all;
                         }
+                        return all;
                     });
                 });
                 break;
             }
-        } else {
+        }
+        else {
             if (extglob.isMatch(filePath, target)) {
                 config = configs[i];
                 break;

@@ -4,7 +4,7 @@
   "discription": "makit-plugin",
   "scripts": {
     "preversion": "npm run lint && npm run cover",
-    "lint": "eslint 'src/**/*.ts'",
+    "lint": "eslint src/**/*.ts",
     "docs": "typedoc --out docs src && touch docs/.nojekyll",
     "conf": "tsc && node_modules/ts-node/dist/bin.js src/configuration/generate.ts",
     "test": "jest --no-cache",

@@ -1,22 +1,23 @@
-import { inlineTpl } from '../plugin/inline/inline-tpl';
-import { readFileSync } from 'fs';
-import { inlineCss } from '../plugin/inline/inline-css';
-import { inlineJS } from '../plugin/inline/inline-js';
-import { RecipeImpl } from '../utils/recipe-factory';
-const { outputFileSync,} = require('fs-extra');
+import {readFileSync} from 'fs';
+import {inlineTpl} from '../plugin/inline/inline-tpl';
+import {inlineCss} from '../plugin/inline/inline-css';
+import {inlineJS} from '../plugin/inline/inline-js';
+import {RecipeImpl} from '../utils/recipe-factory';
 
-export interface hashRecipeOption {
+const {outputFileSync} = require('fs-extra');
+
+export interface HashRecipeOption {
     base: string
     staticDomain: string
 }
 
-export const tpl: RecipeImpl<hashRecipeOption, undefined> = async ({target, dep, base, staticDomain, make}) => {
+export const tpl: RecipeImpl<HashRecipeOption, undefined> = async ({target, dep, base, staticDomain, make}) => {
     let content = readFileSync(dep).toString();
     content = await inlineCss(make, content, dep, {base});
-    content = await inlineJS(make, content, dep, { base,});
+    content = await inlineJS(make, content, dep, {base});
     content = await inlineTpl(make, content, target, {
         base,
-        staticDomain: staticDomain
+        'staticDomain': staticDomain
     });
     content = content.replace(/('|")?(\/\/)?m.baidu.com\/se(\/)?('|")/g, '$1/se$4');
     content = content.replace(/url\(('|")?(\/static)(.*)\.(png|jpg|gif|jpeg)('|")?\)/ig, `url($1${staticDomain}$2$3.$4$5)`);
@@ -26,5 +27,4 @@ export const tpl: RecipeImpl<hashRecipeOption, undefined> = async ({target, dep,
     }
 
     outputFileSync(target, content);
-}
-
+};

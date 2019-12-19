@@ -1,6 +1,8 @@
-import { extname, basename, dirname, join } from 'path';
-const { sync } = require('globby');
+import {extname, basename, dirname, join} from 'path';
 
+const {sync} = require('globby');
+
+/* eslint-disable no-param-reassign */
 /** 根据配置获得入口文件列表 */
 export function entryImpl(entries: Entry[]) {
     let files: string[] = [];
@@ -30,7 +32,6 @@ export function entry(entries: Entry[] | Entry) {
     console.log(`${files.length} entries found in ${Date.now() - begin}ms`);
     return files;
 }
-
 
 export interface Entry {
     files: string[]

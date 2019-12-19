@@ -1,4 +1,4 @@
-import { Stats, statSync, readFileSync } from 'fs';
+import {Stats, statSync, readFileSync} from 'fs';
 
 /** 导出一个符合gulp-file接口的对象 */
 export function loadFile(filePath: string) {

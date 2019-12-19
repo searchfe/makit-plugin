@@ -1,18 +1,15 @@
-import { RecipeImpl } from '../utils/recipe-factory';
-import { readFileSync } from 'fs';
-import { minify } from 'uglify-js';
-const { outputFileSync} = require('fs-extra');
+import {readFileSync} from 'fs';
+import {minify} from 'uglify-js';
+import {RecipeImpl} from '../utils/recipe-factory';
 
-export interface compressRecipeOption {}
+const {outputFileSync} = require('fs-extra');
 
-export const compress: RecipeImpl<compressRecipeOption, CompressConfig> = ({target, dep}, config: CompressConfig) => {
+export interface CompressRecipeOption {}
+
+export const compress: RecipeImpl<CompressRecipeOption, CompressConfig> = ({target, dep}, config: CompressConfig) => {
     const content = readFileSync(dep).toString();
     outputFileSync(target, compressJs(content, config as CompressConfig));
-}
-
-
-
-
+};
 
 export function compressJs(content: string, options: CompressConfig) {
     if (!options.compress) {
@@ -20,9 +17,6 @@ export function compressJs(content: string, options: CompressConfig) {
     }
     return minify(content, options.ugilyJsConfig).code || content;
 }
-
-
-
 
 export interface CompressConfig {
     file: string,

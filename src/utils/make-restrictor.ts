@@ -1,12 +1,12 @@
-import { Make } from "makit/dist/make";
-import { make } from 'makit';
-import { MakeProcess } from "./make-process";
+import {Make} from 'makit/dist/make';
+import {make} from 'makit';
+import {MakeProcess} from './make-process';
 
-enum  Status {
+enum Status {
     doing,
     done
 }
-export class MakeRestrictor{
+export class MakeRestrictor {
     private rules: string[] = [];
     private last: Promise<Make>;
     private status: Status;
@@ -28,12 +28,13 @@ export class MakeRestrictor{
         this.exec();
     }
     exec() {
-        switch(this.status) {
+        switch (this.status) {
             case Status.done:
                 this.next();
                 break;
             case Status.doing:
                 break;
+            default:
         }
     }
     next() {
@@ -44,14 +45,16 @@ export class MakeRestrictor{
             this.last.then(() => {
                 if (this.rules.length) {
                     this.next();
-                } else {
+                }
+                else {
                     this.end();
                 }
-            }).catch((e) => {
+            })['catch'](e => {
                 console.log(e);
                 if (this.rules.length) {
                     this.next();
-                } else {
+                }
+                else {
                     this.end();
                 }
             });
@@ -76,7 +79,8 @@ export class MakeRestrictor{
     async whenIdle(fn: any) {
         if (this.status === Status.done) {
             await fn();
-        } else {
+        }
+        else {
             this.fnList.push(fn);
         }
     }

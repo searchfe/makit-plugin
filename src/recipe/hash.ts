@@ -1,21 +1,21 @@
 
-import { RecipeImpl } from '../utils/recipe-factory';
-import { copyFileSync, readFileSync, existsSync } from 'fs';
-import { HashConfig, md5 } from '../plugin/hash';
-import { outputFileSync } from 'fs-extra';
+import {copyFileSync, readFileSync, existsSync} from 'fs';
+import {outputFileSync} from 'fs-extra';
+import {RecipeImpl} from '../utils/recipe-factory';
+import {HashConfig, md5} from '../plugin/hash';
 
-export interface hashRecipeOption {}
+export interface HashRecipeOption {}
 
-export const hash: RecipeImpl<hashRecipeOption, HashConfig> = async ({target, dep}, config: HashConfig) => {
-    copyFileSync(dep , target);
-}
+export const hash: RecipeImpl<HashRecipeOption, HashConfig> = async ({target, dep}, config: HashConfig) => {
+    copyFileSync(dep, target);
+};
 
 interface MakeHashOption {
     baseFolder: string
     staticDomain: string
     origin?: string
 }
-
+/* eslint-disable no-param-reassign */
 export const makeHash: RecipeImpl<MakeHashOption, HashConfig> = ({target, dep, baseFolder, staticDomain, origin}, config: HashConfig) => {
     origin = origin || dep;
     let info: any = {};
@@ -26,25 +26,26 @@ export const makeHash: RecipeImpl<MakeHashOption, HashConfig> = ({target, dep, b
 
         outputFileSync(rs.path, content);
         info = {
-            file: origin,
-            md5: rs.md5,
-            path: rs.path,
+            'file': origin,
+            'md5': rs.md5,
+            'path': rs.path,
             relativeUrl,
-            url: staticDomain + relativeUrl
+            'url': staticDomain + relativeUrl
         };
-    } else if (config) {
+    }
+    else if (config) {
         const relativeUrl = origin.replace(baseFolder + '/', '');
         info = {
-            file: origin,
-            md5: '',
-            path: origin,
+            'file': origin,
+            'md5': '',
+            'path': origin,
             relativeUrl,
-            url: staticDomain + relativeUrl
-        }
+            'url': staticDomain + relativeUrl
+        };
         if (!existsSync(origin)) {
             copyFileSync(dep, origin);
         }
     }
     copyFileSync(dep, target);
     outputFileSync(target + '.md5', JSON.stringify(info, null, '\n'));
-}
+};

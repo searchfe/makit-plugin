@@ -45,28 +45,29 @@ class Stdout {
             newStr.push(str.substring(0, process.stdout.columns - 20));
         });
         this.ustr = newStr.join('\n');
-        process.stdout.write(this.ustr,'utf-8');
+        process.stdout.write(this.ustr, 'utf-8');
         this.type = outType.stdout;
     }
     back(line?: number) {
-        if (!line) {
+        let ln = line;
+        if (!ln) {
             if (this.ustr) {
                 // 逐行计算高度
                 let l = 0;
                 this.ustr.split('\n').forEach(str => {
                     l += Math.ceil(str.length / process.stdout.columns);
-                })
-                line = l;
+                });
+                ln = l;
             } else {
-                line = 0;
+                ln = 0;
             }
         }
 
-        for(let i = 0; i < line; i++) {
+        for (let i = 0; i < ln; i++) {
             readline.cursorTo(process.stdout, 0);
             readline.clearLine(process.stdout, 0);
-            if (i > 0 ){
-                readline.moveCursor(process.stdout, 0 , -1);
+            if (i > 0) {
+                readline.moveCursor(process.stdout, 0, -1);
             }
         }
     }

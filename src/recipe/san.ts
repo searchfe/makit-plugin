@@ -5,14 +5,13 @@
 import {readFileSync} from 'fs';
 import {isAbsolute, resolve, dirname} from 'path';
 import {outputFileSync} from 'fs-extra';
-import { RecipeImpl } from '../utils/recipe-factory';
+import {RecipeImpl} from '../utils/recipe-factory';
 
 import {removeComments} from '../plugin/san/template';
 import {analyzeTsDepsAndReplace} from '../plugin/san/deps';
-import { ts2php as ts2phpCompiler } from '../plugin/san/ts2php';
-import { createSanssr } from '../plugin/san/ssr';
+import {ts2php as ts2phpCompiler} from '../plugin/san/ts2php';
+import {createSanssr} from '../plugin/san/ssr';
 import {replaceEnv} from '../plugin/san/env';
-
 
 export const formatCompilerOptions: RecipeImpl<{}, undefined> = ({target, dep}) => {
     const tsConfig = require(dep);
@@ -41,7 +40,6 @@ export const formatCompilerOptions: RecipeImpl<{}, undefined> = ({target, dep}) 
 };
 
 export const sanTpl: RecipeImpl<{}, undefined> = ({target, dep}) => {
-
     // 模板处理
     let html = readFileSync(dep).toString();
     html = removeComments(html);
@@ -56,7 +54,6 @@ interface Ts2phpPreBuildRecipeOptions {
 }
 export const ts2phpPreBuild: RecipeImpl<Ts2phpPreBuildRecipeOptions, undefined> = async ({
     target, dep, srcRoot, buildRoot, make, staticDomain, env}) => {
-
     const ssrTarget = env.SSR_TARGET || 'php';
 
     // 依赖分析： html, lib  macro
@@ -69,7 +66,6 @@ interface Ts2phpRecipeOptions {
     buildRoot: string;
 }
 export const ts2php: RecipeImpl<Ts2phpRecipeOptions, undefined> = async ({target, dep, buildRoot}) => {
-
     // ts2php
     const options = require(`${buildRoot}/san-app/ts2phprc`);
     const phpCode = await ts2phpCompiler(dep, options.clone());
@@ -81,7 +77,6 @@ interface SanssrRecipeOptions {
 }
 let sanssrCompiler: any;
 export const sanssr: RecipeImpl<SanssrRecipeOptions, undefined> = ({target, dep, buildRoot}) => {
-
     // san-ssr
     sanssrCompiler = sanssrCompiler || createSanssr(buildRoot);
     const phpCode = sanssrCompiler(dep);

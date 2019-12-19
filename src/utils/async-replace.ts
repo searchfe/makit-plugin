@@ -15,9 +15,7 @@ export async function replace(str: string, regex: RegExp, asyncFn: AsyncFn, noti
     str.replace(regex, (match, ...args) => {
         const promise: Promise<string> = asyncFn(match, ...args);
         promises.push(promise);
-        promise
-            .then(notifyCb)
-            .catch(DO_NOTHING);
+        promise.then(notifyCb)['catch'](DO_NOTHING);
         return match;
     });
     const data = await Promise.all(promises);
@@ -29,4 +27,4 @@ export async function replace(str: string, regex: RegExp, asyncFn: AsyncFn, noti
 //     return replace(str, regex, asyncFnSeq, notifyCb);
 // }
 
-type AsyncFn =  (match: string, ...groups: string[]) => Promise<string>;
+type AsyncFn = (match: string, ...groups: string[]) => Promise<string>;
