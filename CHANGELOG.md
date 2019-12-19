@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/searchfe/makit-plugin/compare/v1.2.0...v1.2.1) (2019-12-19)
+
+
+### Bug Fixes
+
+* add log deps ([7fdfd2c](https://github.com/searchfe/makit-plugin/commit/7fdfd2ce820df4e82d0dcae775b29d3f534e0ed6))
+
 # [1.2.0](https://github.com/searchfe/makit-plugin/compare/v1.1.0...v1.2.0) (2019-12-19)
 
 
