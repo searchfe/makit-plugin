@@ -5,15 +5,15 @@
   "scripts": {
     "preversion": "npm run lint && npm run cover",
     "lint": "eslint 'src/**/*.ts'",
-    "doc": "gulp doc",
+    "docs": "typedoc --out docs src && touch docs/.nojekyll",
     "conf": "tsc && node_modules/ts-node/dist/bin.js src/configuration/generate.ts",
     "test": "jest --no-cache",
     "test0": "node_modules/mocha/bin/_mocha --require ts-node/register --require source-map-support/register -t 3000 --recursive",
     "cover": "jest --no-cache --coverage",
     "coveralls": "jest --no-cache --coverage && cat ./coverage/lcov.info | coveralls",
     "url": "echo visit: http://127.0.0.1:8077/demo/?debug",
-    "build": "gulp",
-    "watch": "gulp watch & npm start",
+    "build": "tsc",
+    "watch": "tsc --watch",
     "commit": "git-cz",
     "semantic-release": "semantic-release"
   },
