@@ -1,0 +1,30 @@
+# platform related
+.DS_Store
+._.DS_Store
+*.log
+
+# editor related
+.idea
+*.swp
+*.~
+.*.un~
+.vimrc
+.cache
+
+# build related
+build/
+dist/
+node_modules/
+amd_modules/
+test-reports/
+coverage/
+.nyc_output
+
+# develop
+mydev*
+/debug/
+*.local.md
+
+/plugin/
+/recipe/
+/utils/
