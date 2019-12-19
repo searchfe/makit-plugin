@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/searchfe/makit-plugin/compare/v1.1.0...v1.2.0) (2019-12-19)
+
+
+### Features
+
+* fix uglify deps ([f9e54ea](https://github.com/searchfe/makit-plugin/commit/f9e54ea7727025b12e7a98fd6b61be403127f204))
+
 # [1.1.0](https://github.com/searchfe/makit-plugin/compare/v1.0.0...v1.1.0) (2019-12-19)
 
 
