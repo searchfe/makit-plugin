@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/searchfe/makit-plugin/compare/v1.0.0...v1.1.0) (2019-12-19)
+
+
+### Features
+
+* add deps ([3320f1a](https://github.com/searchfe/makit-plugin/commit/3320f1a225fe4eff2465dee5837ea9d175243311))
+* add deps ([116618a](https://github.com/searchfe/makit-plugin/commit/116618afb4126ada163ed8c4fb8caed5e178fc8e))
+
 # 1.0.0 (2019-12-19)
 
 
