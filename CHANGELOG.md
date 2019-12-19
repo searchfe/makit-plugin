@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/searchfe/makit-plugin/compare/v1.2.1...v1.2.2) (2019-12-19)
+
+
+### Bug Fixes
+
+* limit san-ssr version ([aea5df0](https://github.com/searchfe/makit-plugin/commit/aea5df05d3fb49ade5614f90585a8e6b65823b81))
+
 ## [1.2.1](https://github.com/searchfe/makit-plugin/compare/v1.2.0...v1.2.1) (2019-12-19)
 
 
