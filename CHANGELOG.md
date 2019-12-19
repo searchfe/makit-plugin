@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/searchfe/makit-plugin/compare/v1.3.0...v1.3.1) (2019-12-19)
+
+
+### Bug Fixes
+
+* uglify@3.6.9 ([1a28cdd](https://github.com/searchfe/makit-plugin/commit/1a28cdde86c30cb0701fc52165799ca5c7953070))
+
 # [1.3.0](https://github.com/searchfe/makit-plugin/compare/v1.2.2...v1.3.0) (2019-12-19)
 
 
