@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/searchfe/makit-plugin/compare/v1.2.2...v1.3.0) (2019-12-19)
+
+
+### Features
+
+* add peerDependencies ([6478333](https://github.com/searchfe/makit-plugin/commit/64783334749c7c336c660a1f902014d17b73e2fb))
+
 ## [1.2.2](https://github.com/searchfe/makit-plugin/compare/v1.2.1...v1.2.2) (2019-12-19)
 
 
