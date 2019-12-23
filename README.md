@@ -66,7 +66,7 @@ const recipe = RecipeFactory(recipeImpl, {key: '$1', ...dynamicOption}, configs)
 rule(`(**/*).js`, `${src}/$1.js`, recipe);
 ```
 
-### plugin / recipe
+### recipe
 
 [compress](https://searchfe.github.io/makit-plugin/modules/_recipe_compress_.html)
 
