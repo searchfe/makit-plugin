@@ -27,6 +27,7 @@ makit-plugin 为基于 [makit](https://github.com/searchfe/makit) 的构建项�
 const comp = process.env.compress;
 
 const recipe = RecipeFactory(recipeImpl, {key: '$1'});
+
 rule(`(**/*).min.js`, `/$1.js`, RecipeFactory(recipeImpl, {
     comp,
 }));
@@ -38,6 +39,7 @@ function recipeImpl({target, dep, comp}) {}
 
 ```
 const recipe = RecipeFactory(recipeImpl, {key: '$1'});
+
 rule(`(**/*).min.js`, `/$1.js`, recipe);
 
 function recipeImpl({target, dep, key}) {
@@ -58,8 +60,10 @@ const configs = [{
     file: 'static/**.min.js',
     compress: false
 }];
+
 const recipe = RecipeFactory(recipeImpl, {key: '$1', ...dynamicOption}, configs);
-rule(`(**/*).js`, `${src}/$1.js`, RecipeFactory(recipeImpl, {key: '$1'}));
+
+rule(`(**/*).js`, `${src}/$1.js`, recipe);
 ```
 
 ### plugin / recipe
