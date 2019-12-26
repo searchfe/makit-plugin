@@ -5,6 +5,7 @@
 import {readFileSync} from 'fs';
 import {isAbsolute, resolve, dirname} from 'path';
 import {outputFileSync} from 'fs-extra';
+import {SanProjectOptions} from 'san-ssr/dist/models/san-project';
 import {RecipeImpl} from '../utils/recipe-factory';
 
 import {removeComments} from '../plugin/san/template';
@@ -63,22 +64,39 @@ export const ts2phpPreBuild: RecipeImpl<Ts2phpPreBuildRecipeOptions, undefined> 
 };
 
 interface Ts2phpRecipeOptions {
-    buildRoot: string;
+    options: any
 }
-export const ts2php: RecipeImpl<Ts2phpRecipeOptions, undefined> = async ({target, dep, buildRoot}) => {
-    // ts2php
-    const options = require(`${buildRoot}/san-app/ts2phprc`);
-    const phpCode = await ts2phpCompiler(dep, options.clone());
+export const ts2php: RecipeImpl<Ts2phpRecipeOptions, undefined> = async ({target, dep, options}) => {
+    const phpCode = await ts2phpCompiler(dep, clone(options));
     outputFileSync(target, phpCode);
 };
 
 interface SanssrRecipeOptions {
-    buildRoot: string;
+    sanProjectOptions: () => SanProjectOptions;
+    targetOptions: () => any
 }
+
 let sanssrCompiler: any;
-export const sanssr: RecipeImpl<SanssrRecipeOptions, undefined> = ({target, dep, buildRoot}) => {
+export const sanssr: RecipeImpl<SanssrRecipeOptions, undefined> = ({target, dep, sanProjectOptions, targetOptions}) => {
     // san-ssr
-    sanssrCompiler = sanssrCompiler || createSanssr(buildRoot);
+    sanssrCompiler = sanssrCompiler || createSanssr(sanProjectOptions(), 'php', targetOptions());
     const phpCode = sanssrCompiler(dep);
     outputFileSync(target, phpCode);
 };
+
+function clone(options: any) {
+    const rs: any = Array.isArray(options) ? [] : {};
+    Object.keys(options).forEach(key => {
+        if (Array.isArray(options[key])) {
+            rs[key] = clone(options[key]);
+        }
+        else if (typeof options[key] === 'object') {
+            rs[key] = clone(options[key]);
+        }
+        else {
+        // if (typeof key === 'string' || typeof key === 'function') {
+            rs[key] = options[key];
+        }
+    });
+    return rs;
+}

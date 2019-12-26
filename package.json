@@ -82,7 +82,6 @@
     "less": "^3.10.3",
     "madge": "^3.4.4",
     "makit": "^1.15.0",
-    "matcher": "^2.0.0",
     "md5-file": "^4.0.0",
     "prompt": "^1.0.0",
     "readable-stream": "^3.4.0",
