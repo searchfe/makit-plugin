@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/searchfe/makit-plugin/compare/v1.3.1...v1.4.0) (2019-12-26)
+
+
+### Features
+
+* upgrade san compile ([dd43687](https://github.com/searchfe/makit-plugin/commit/dd4368772085887bcab98a080283d821259fc9b9))
+
 ## [1.3.1](https://github.com/searchfe/makit-plugin/compare/v1.3.0...v1.3.1) (2019-12-19)
 
 
