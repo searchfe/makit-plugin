@@ -2,7 +2,6 @@ import {resolve} from 'path';
 import {Context, RecipeDeclaration} from 'makit';
 
 const extglob = require('extglob');
-const matcher = require('matcher');
 
 /**
  * @param recipeFn RecipeMaker
@@ -78,12 +77,17 @@ export function pickConfig<T extends Option>(configs: (T & RecipeImplConfig)[], 
                 /** 这里只是浅拷贝，一层生效 */
                 config = {...(configs[i] as any)};
                 Object.keys(config).forEach(key => {
-                    (config as any)[key] = (config as any)[key].replace(/\$(\d+)/g, (all, index) => {
-                        if (matches[index]) {
-                            return matches[index];
-                        }
-                        return all;
-                    });
+                    if (typeof (config as any)[key] === 'string') {
+                        (config as any)[key] = (config as any)[key].replace(/\$(\d+)/g, (all, index) => {
+                            if (matches[index]) {
+                                return matches[index];
+                            }
+                            return all;
+                        });
+                    }
+                    else if (typeof (config as any)[key] === 'function') {
+                        (config as any)[key] = (config as any)[key](...matches);
+                    }
                 });
                 break;
             }

@@ -58,7 +58,8 @@ class Stdout {
                     l += Math.ceil(str.length / process.stdout.columns);
                 });
                 ln = l;
-            } else {
+            }
+            else {
                 ln = 0;
             }
         }

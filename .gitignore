@@ -19,6 +19,7 @@ amd_modules/
 test-reports/
 coverage/
 .nyc_output
+.deploy
 
 # develop
 mydev*
