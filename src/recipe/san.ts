@@ -52,13 +52,15 @@ interface Ts2phpPreBuildRecipeOptions {
     buildRoot: string;
     staticDomain: string;
     env: any;
+    srcAppDir: string;
+    buildAppDir: string;
 }
 export const ts2phpPreBuild: RecipeImpl<Ts2phpPreBuildRecipeOptions, undefined> = async ({
-    target, dep, srcRoot, buildRoot, make, staticDomain, env}) => {
+    target, dep, srcRoot, buildRoot, make, staticDomain, env, srcAppDir, buildAppDir}) => {
     const ssrTarget = env.SSR_TARGET || 'php';
 
     // 依赖分析： html, lib  macro
-    let newCode = await analyzeTsDepsAndReplace(make, dep, srcRoot, buildRoot, staticDomain, ssrTarget);
+    let newCode = await analyzeTsDepsAndReplace(make, dep, srcRoot, buildRoot, srcAppDir, buildAppDir, staticDomain, ssrTarget);
     newCode = replaceEnv(newCode, env);
     outputFileSync(target, newCode);
 };

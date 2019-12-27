@@ -61,13 +61,11 @@ async function replaceModules(
 
 /* eslint-disable max-lines-per-function */
 async function analyzeTsFile(
-    make: any, filePath: string, srcDir: string, buildDir: string, staticDomain: string, ssrTarget: string
+    make: any, filePath: string, srcDir: string, buildDir: string, srcAppDir: string, buildAppDir: string, staticDomain: string, ssrTarget: string
 ) {
 
     const reg = /import\s+((?:.|\n)+?)\s+from\s+('|")(.+?)(!(\w+))?\2;/ig;
     const dirPath = dirname(filePath);
-    const srcAppDir = resolve(srcDir, 'app');
-    const buildAppDir = resolve(buildDir, 'san-app');
 
     // 先 trick 实现
     const sanIdMap = new Map<String, String>();
@@ -87,6 +85,7 @@ async function analyzeTsFile(
 
             // src/app 外面的文件
             else {
+                console.log('analyzeTsFile', filePath, depPath, srcDir);
                 depPath = buildDir + depPath.replace(srcDir, '');
             }
 
@@ -141,9 +140,9 @@ async function analyzeTsFile(
 }
 /* eslint-enable max-lines-per-function */
 export async function analyzeTsDepsAndReplace(
-    make: any, filePath: string, srcDir: string, buildDir: string, staticDomain: string, ssrTarget: string
+    make: any, filePath: string, srcDir: string, buildDir: string, srcAppDir: string, buildAppDir: string, staticDomain: string, ssrTarget: string
 ) {
-    const {sanIdMap, code: newCode} = await analyzeTsFile(make, filePath, srcDir, buildDir, staticDomain, ssrTarget);
+    const {sanIdMap, code: newCode} = await analyzeTsFile(make, filePath, srcDir, buildDir, srcAppDir, buildAppDir, staticDomain, ssrTarget);
 
     let code = newCode;
     if (sanIdMap.size) {
