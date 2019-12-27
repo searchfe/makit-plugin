@@ -50,12 +50,14 @@ async function inline (make: Make, reg: RegExp, content: string, path: string, o
             case '__inline':
                 debug('link inline', path);
                 let filePath = absolutize(value, path, options.base);
-                let classAttr = '';
                 await make(filePath);
                 // @todo 目前所有tpl都会过一次link匹配，后续看是否有优化空间。
-                const res = all.match(/<link.*(class\s*=\s*['|"][^"]*['|"]).*>/i);
-                classAttr = res ? res[1] : '';
-                inlinecontent += getSourceContent(make, filePath, true, classAttr);
+                const attrArr = all.match(/\s*\s(class|data-key)(\s*=\s*['|"][^"]*['|"])?/g);
+                let attrStr = '';
+                for (let index = 0; index < attrArr.length; index++) {
+                    attrStr += attrArr[index];
+                }
+                inlinecontent += getSourceContent(make, filePath, true, attrStr);
                 break;
             }
         }
