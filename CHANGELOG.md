@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/searchfe/makit-plugin/compare/v1.4.0...v1.5.0) (2019-12-27)
+
+
+### Features
+
+* add buildAppRoot ([9c0cc6d](https://github.com/searchfe/makit-plugin/commit/9c0cc6da2bdce69d660b705a46a7f5dce2bad7fe))
+
 # [1.4.0](https://github.com/searchfe/makit-plugin/compare/v1.3.1...v1.4.0) (2019-12-26)
 
 
