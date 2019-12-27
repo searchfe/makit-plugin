@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/searchfe/makit-plugin/compare/v1.5.0...v1.6.0) (2019-12-27)
+
+
+### Features
+
+* remove async/await when ssr target is not js ([2b57b02](https://github.com/searchfe/makit-plugin/commit/2b57b02e5dec9646ab0e3a0ed16d09cbd027408e))
+
 # [1.5.0](https://github.com/searchfe/makit-plugin/compare/v1.4.0...v1.5.0) (2019-12-27)
 
 

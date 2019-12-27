@@ -1,6 +1,6 @@
 {
   "name": "makit-plugin",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "discription": "makit-plugin",
   "scripts": {
     "preversion": "npm run lint && npm run cover",
