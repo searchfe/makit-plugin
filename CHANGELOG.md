@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/searchfe/makit-plugin/compare/v1.6.0...v1.7.0) (2019-12-27)
+
+
+### Features
+
+* css inline支持添加data-key属性 ([59de4f7](https://github.com/searchfe/makit-plugin/commit/59de4f78d4e8d8f7052ceb56da965621e4dcd227))
+
 # [1.6.0](https://github.com/searchfe/makit-plugin/compare/v1.5.0...v1.6.0) (2019-12-27)
 
 
