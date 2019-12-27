@@ -70,8 +70,15 @@ async function analyzeTsFile(
     // 先 trick 实现
     const sanIdMap = new Map<String, String>();
 
-    const oriCode = readFileSync(filePath).toString();
-    const code = await replace(oriCode, reg, async (m, name, quote, id: string, loader, loaderType) => {
+    let code = readFileSync(filePath).toString();
+    if (ssrTarget !== 'js') {
+        // 删除所有 async， await, trick 方案， 最好改为分析语法树
+        code = code
+            .replace(/:\s*Promise<[^>]+?>/g, '') // 暂不支持泛型嵌套
+            .replace(/\basync\s+([a-z_])/g, '$1')
+            .replace(/\bawait\s+([a-z_])/g, '$1');
+    }
+    code = await replace(code, reg, async (m, name, quote, id: string, loader, loaderType) => {
 
         const key = name.trim();
 
