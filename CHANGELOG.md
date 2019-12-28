@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/searchfe/makit-plugin/compare/v1.7.0...v1.7.1) (2019-12-28)
+
+
+### Bug Fixes
+
+* tpl inline未判断正则未匹配到 ([9e2b02e](https://github.com/searchfe/makit-plugin/commit/9e2b02e4427f695e521c3ab4b0fbccc74b8f0728))
+
 # [1.7.0](https://github.com/searchfe/makit-plugin/compare/v1.6.0...v1.7.0) (2019-12-27)
 
 
