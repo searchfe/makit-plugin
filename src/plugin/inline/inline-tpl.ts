@@ -54,8 +54,10 @@ async function inline (make: Make, reg: RegExp, content: string, path: string, o
                 // @todo 目前所有tpl都会过一次link匹配，后续看是否有优化空间。
                 const attrArr = all.match(/\s*\s(class|data-key)(\s*=\s*['|"][^"]*['|"])?/g);
                 let attrStr = '';
-                for (let index = 0; index < attrArr.length; index++) {
-                    attrStr += attrArr[index];
+                if (attrArr) {
+                    for (let index = 0; index < attrArr.length; index++) {
+                        attrStr += attrArr[index];
+                    }
                 }
                 inlinecontent += getSourceContent(make, filePath, true, attrStr);
                 break;
