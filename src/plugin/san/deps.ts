@@ -92,7 +92,6 @@ async function analyzeTsFile(
 
             // src/app 外面的文件
             else {
-                console.log('analyzeTsFile', filePath, depPath, srcDir);
                 depPath = buildDir + depPath.replace(srcDir, '');
             }
 

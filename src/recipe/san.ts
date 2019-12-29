@@ -14,32 +14,6 @@ import {ts2php as ts2phpCompiler} from '../plugin/san/ts2php';
 import {createSanssr} from '../plugin/san/ssr';
 import {replaceEnv} from '../plugin/san/env';
 
-export const formatCompilerOptions: RecipeImpl<{}, undefined> = ({target, dep}) => {
-    const tsConfig = require(dep);
-    const compilerOptions = tsConfig.compilerOptions || {};
-
-    const targetDir = dirname(target);
-
-    // 修正 baseUrl
-    let baseUrl = compilerOptions.baseUrl;
-    if (baseUrl && !isAbsolute(baseUrl)) {
-        baseUrl = resolve(targetDir, baseUrl);
-        compilerOptions.baseUrl = baseUrl;
-    }
-    if (compilerOptions.typeRoots && compilerOptions.typeRoots.length) {
-        compilerOptions.typeRoots = compilerOptions.typeRoots.map(root => {
-            if (!isAbsolute(root)) {
-                return resolve(baseUrl, root);
-            }
-            return root;
-        });
-    }
-
-    tsConfig.compilerOptions = compilerOptions;
-
-    outputFileSync(target, JSON.stringify(tsConfig, null, 4));
-};
-
 export const sanTpl: RecipeImpl<{}, undefined> = ({target, dep}) => {
     // 模板处理
     let html = readFileSync(dep).toString();
@@ -76,12 +50,13 @@ export const ts2php: RecipeImpl<Ts2phpRecipeOptions, undefined> = async ({target
 interface SanssrRecipeOptions {
     sanProjectOptions: () => SanProjectOptions;
     targetOptions: () => any
+    lang?: 'php' | 'js'
 }
 
 let sanssrCompiler: any;
-export const sanssr: RecipeImpl<SanssrRecipeOptions, undefined> = ({target, dep, sanProjectOptions, targetOptions}) => {
+export const sanssr: RecipeImpl<SanssrRecipeOptions, undefined> = ({target, dep, sanProjectOptions, targetOptions, lang}) => {
     // san-ssr
-    sanssrCompiler = sanssrCompiler || createSanssr(sanProjectOptions(), 'php', targetOptions());
+    sanssrCompiler = sanssrCompiler || createSanssr(sanProjectOptions(), lang || 'php', targetOptions());
     const phpCode = sanssrCompiler(dep);
     outputFileSync(target, phpCode);
 };
