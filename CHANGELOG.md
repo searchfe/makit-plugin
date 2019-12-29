@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/searchfe/makit-plugin/compare/v1.7.1...v1.8.0) (2019-12-29)
+
+
+### Features
+
+* add tsc recipe ([e6f84b9](https://github.com/searchfe/makit-plugin/commit/e6f84b9cde77225a2a8f447867a7027e4bd8fbfe))
+
 ## [1.7.1](https://github.com/searchfe/makit-plugin/compare/v1.7.0...v1.7.1) (2019-12-28)
 
 
