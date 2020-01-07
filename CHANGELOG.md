@@ -1,3 +1,45 @@
+# [1.8.0](https://github.com/searchfe/makit-plugin/compare/v1.7.1...v1.8.0) (2019-12-29)
+
+
+### Features
+
+* add tsc recipe ([e6f84b9](https://github.com/searchfe/makit-plugin/commit/e6f84b9cde77225a2a8f447867a7027e4bd8fbfe))
+
+## [1.7.1](https://github.com/searchfe/makit-plugin/compare/v1.7.0...v1.7.1) (2019-12-28)
+
+
+### Bug Fixes
+
+* tpl inline未判断正则未匹配到 ([9e2b02e](https://github.com/searchfe/makit-plugin/commit/9e2b02e4427f695e521c3ab4b0fbccc74b8f0728))
+
+# [1.7.0](https://github.com/searchfe/makit-plugin/compare/v1.6.0...v1.7.0) (2019-12-27)
+
+
+### Features
+
+* css inline支持添加data-key属性 ([59de4f7](https://github.com/searchfe/makit-plugin/commit/59de4f78d4e8d8f7052ceb56da965621e4dcd227))
+
+# [1.6.0](https://github.com/searchfe/makit-plugin/compare/v1.5.0...v1.6.0) (2019-12-27)
+
+
+### Features
+
+* remove async/await when ssr target is not js ([2b57b02](https://github.com/searchfe/makit-plugin/commit/2b57b02e5dec9646ab0e3a0ed16d09cbd027408e))
+
+# [1.5.0](https://github.com/searchfe/makit-plugin/compare/v1.4.0...v1.5.0) (2019-12-27)
+
+
+### Features
+
+* add buildAppRoot ([9c0cc6d](https://github.com/searchfe/makit-plugin/commit/9c0cc6da2bdce69d660b705a46a7f5dce2bad7fe))
+
+# [1.4.0](https://github.com/searchfe/makit-plugin/compare/v1.3.1...v1.4.0) (2019-12-26)
+
+
+### Features
+
+* upgrade san compile ([dd43687](https://github.com/searchfe/makit-plugin/commit/dd4368772085887bcab98a080283d821259fc9b9))
+
 ## [1.3.1](https://github.com/searchfe/makit-plugin/compare/v1.3.0...v1.3.1) (2019-12-19)
 
 

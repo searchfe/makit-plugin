@@ -61,19 +61,24 @@ async function replaceModules(
 
 /* eslint-disable max-lines-per-function */
 async function analyzeTsFile(
-    make: any, filePath: string, srcDir: string, buildDir: string, staticDomain: string, ssrTarget: string
+    make: any, filePath: string, srcDir: string, buildDir: string, srcAppDir: string, buildAppDir: string, staticDomain: string, ssrTarget: string
 ) {
 
     const reg = /import\s+((?:.|\n)+?)\s+from\s+('|")(.+?)(!(\w+))?\2;/ig;
     const dirPath = dirname(filePath);
-    const srcAppDir = resolve(srcDir, 'app');
-    const buildAppDir = resolve(buildDir, 'san-app');
 
     // 先 trick 实现
     const sanIdMap = new Map<String, String>();
 
-    const oriCode = readFileSync(filePath).toString();
-    const code = await replace(oriCode, reg, async (m, name, quote, id: string, loader, loaderType) => {
+    let code = readFileSync(filePath).toString();
+    if (ssrTarget !== 'js') {
+        // 删除所有 async， await, trick 方案， 最好改为分析语法树
+        code = code
+            .replace(/:\s*Promise<[^>]+?>/g, '') // 暂不支持泛型嵌套
+            .replace(/\basync\s+([a-z_])/g, '$1')
+            .replace(/\bawait\s+([a-z_])/g, '$1');
+    }
+    code = await replace(code, reg, async (m, name, quote, id: string, loader, loaderType) => {
 
         const key = name.trim();
 
@@ -141,9 +146,9 @@ async function analyzeTsFile(
 }
 /* eslint-enable max-lines-per-function */
 export async function analyzeTsDepsAndReplace(
-    make: any, filePath: string, srcDir: string, buildDir: string, staticDomain: string, ssrTarget: string
+    make: any, filePath: string, srcDir: string, buildDir: string, srcAppDir: string, buildAppDir: string, staticDomain: string, ssrTarget: string
 ) {
-    const {sanIdMap, code: newCode} = await analyzeTsFile(make, filePath, srcDir, buildDir, staticDomain, ssrTarget);
+    const {sanIdMap, code: newCode} = await analyzeTsFile(make, filePath, srcDir, buildDir, srcAppDir, buildAppDir, staticDomain, ssrTarget);
 
     let code = newCode;
     if (sanIdMap.size) {
