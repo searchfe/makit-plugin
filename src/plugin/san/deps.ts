@@ -45,13 +45,22 @@ async function replaceModules(
         return '';
     }
 
+    // 使用内部的库
+    if (id === '@baidu/wise-filters') {
+        return '@baidu/filters';
+    }
+
     if (id !== '@baidu/wise-better-filters') {
         return '';
     }
 
     const relativePath = 'lib/wise-filters.ts';
     const adaptorPath = resolve(srcAppDir, relativePath);
-    const newId = relative(dirPath, adaptorPath).replace(/\.ts$/, '');
+    let newId = relative(dirPath, adaptorPath).replace(/\.ts$/, '');
+    // 当前目录加 './' 前缀， 防止 node 识别为一个 node_module， 而不是当成相对路径
+    if (newId[0] !== '.') {
+        newId = './' + newId;
+    }
     const depPath = resolve(buildAppDir, relativePath);
 
     await make(depPath);
