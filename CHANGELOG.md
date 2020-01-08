@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/searchfe/makit-plugin/compare/v1.8.1...v1.9.0) (2020-01-08)
+
+
+### Features
+
+* fix compilerOptions options ([8ae4822](https://github.com/searchfe/makit-plugin/commit/8ae4822d67e8a0b0155c80cda65f8fce413c0cb8))
+
 ## [1.8.1](https://github.com/searchfe/makit-plugin/compare/v1.8.0...v1.8.1) (2020-01-08)
 
 
