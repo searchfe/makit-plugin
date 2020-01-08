@@ -92,8 +92,8 @@ function addTocompile(file: string, options: ts.CompilerOptions) {
     });
 }
 
-function compile(fileNames: string[], options: ts.CompilerOptions): void {
-    let program = ts.createProgram(fileNames, options);
+function compile(fileNames: string[], options: any): void {
+    let program = ts.createProgram(fileNames, options.compilerOptions);
     let emitResult = program.emit();
 
     let exitCode = emitResult.emitSkipped ? 1 : 0;
