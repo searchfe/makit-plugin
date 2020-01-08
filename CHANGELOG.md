@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/searchfe/makit-plugin/compare/v1.8.0...v1.8.1) (2020-01-08)
+
+
+### Bug Fixes
+
+* 兼容 node 版本的 wise-filters ([051bfd0](https://github.com/searchfe/makit-plugin/commit/051bfd0843f115eb64d4e5feb0e3f2916467a449))
+
 # [1.8.0](https://github.com/searchfe/makit-plugin/compare/v1.7.1...v1.8.0) (2019-12-29)
 
 
