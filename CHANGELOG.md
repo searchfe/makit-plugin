@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/searchfe/makit-plugin/compare/v1.9.0...v1.9.1) (2020-01-19)
+
+
+### Bug Fixes
+
+* 删除对 filters 的处理 ([07e8672](https://github.com/searchfe/makit-plugin/commit/07e86724c478a4ebd40f33eea1adf0af83db20ad))
+
 # [1.9.0](https://github.com/searchfe/makit-plugin/compare/v1.8.1...v1.9.0) (2020-01-08)
 
 
