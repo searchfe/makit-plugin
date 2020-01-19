@@ -45,11 +45,6 @@ async function replaceModules(
         return '';
     }
 
-    // 使用内部的库
-    if (id === '@baidu/wise-filters') {
-        return '@baidu/filters';
-    }
-
     if (id !== '@baidu/wise-better-filters') {
         return '';
     }
