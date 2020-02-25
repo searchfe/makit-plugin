@@ -123,7 +123,9 @@ async function analyzeTsFile(
                     }
                     depPath += '.ts';
                     await make(depPath);
-                    const val = depPath.replace(buildAppDir + '/', '').replace(/\.san\.ts$/, '');
+                    const val = ssrTarget === 'php'
+                        ? depPath.replace(buildAppDir + '/', '').replace(/\.san\.ts$/, '')
+                        : id + '.' + ssrTarget;
                     sanIdMap.set(key, val);
                     return `const ${key} = ${JSON.stringify(val)};`;
                 default:
