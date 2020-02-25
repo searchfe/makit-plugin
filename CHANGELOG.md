@@ -1,3 +1,10 @@
+## [1.9.2](https://github.com/searchfe/makit-plugin/compare/v1.9.1...v1.9.2) (2020-02-25)
+
+
+### Bug Fixes
+
+* only resolve to template root for php target ([b5a03af](https://github.com/searchfe/makit-plugin/commit/b5a03afa6ad5525c7b033c7643de96babd55e5d2))
+
 ## [1.9.1](https://github.com/searchfe/makit-plugin/compare/v1.9.0...v1.9.1) (2020-01-19)
 
 
