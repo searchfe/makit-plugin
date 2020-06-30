@@ -67,6 +67,7 @@ export function watchDeploy(outputFolder: string, deployConf: any) {
 
 export interface WatchToBuildOption{
     src: string
+    rule?: string
 }
 
 export interface WatchToBuildConfig{
@@ -75,7 +76,7 @@ export interface WatchToBuildConfig{
     onChange: string | string[]
 }
 
-export const watchToBuild = ({src}: WatchToBuildOption, configs: WatchToBuildConfig[]) => {
+export const watchToBuild = ({ src, rule }: WatchToBuildOption, configs: WatchToBuildConfig[]) => {
     return async ctx => {
     // 既然要发布， 就提前检查 receiver
         if (!config.receiver) {
@@ -84,7 +85,8 @@ export const watchToBuild = ({src}: WatchToBuildOption, configs: WatchToBuildCon
 
         // 先编译一把
         proc.start();
-        await make('build');
+        const taskName = rule ? rule : 'build';
+        await make(taskName);
         proc.end();
 
         chokidar
