@@ -1,3 +1,15 @@
+# [1.10.0](https://github.com/searchfe/makit-plugin/compare/v1.9.2...v1.10.0) (2020-06-30)
+
+
+### Bug Fixes
+
+* 代码格式问题 ([5f74c1d](https://github.com/searchfe/makit-plugin/commit/5f74c1d16db6a80d0ca3dee6d5e572cdc7ed456d))
+
+
+### Features
+
+* watch命令支持自定义make指令 ([b7d22f9](https://github.com/searchfe/makit-plugin/commit/b7d22f9517418e2d004ee3b5452092cf6a8ae851))
+
 ## [1.9.2](https://github.com/searchfe/makit-plugin/compare/v1.9.1...v1.9.2) (2020-02-25)
 
 
