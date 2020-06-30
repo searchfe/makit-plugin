@@ -76,7 +76,7 @@ export interface WatchToBuildConfig{
     onChange: string | string[]
 }
 
-export const watchToBuild = ({ src, rule }: WatchToBuildOption, configs: WatchToBuildConfig[]) => {
+export const watchToBuild = ({src, rule}: WatchToBuildOption, configs: WatchToBuildConfig[]) => {
     return async ctx => {
     // 既然要发布， 就提前检查 receiver
         if (!config.receiver) {
