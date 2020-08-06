@@ -8,7 +8,7 @@ import {SanProjectOptions} from 'san-ssr/dist/models/san-project';
 
 export type CompilerFuntion = (filePath: string) => string;
 
-export function createSanssr(options: SanProjectOptions, target, targetOptions): CompilerFuntion {
+export function createSanssr(options: SanProjectOptions, target: string, targetOptions): CompilerFuntion {
     let project: SanProject | null = null;
 
     const nsPrefixFn = typeof targetOptions.nsPrefix === 'function'

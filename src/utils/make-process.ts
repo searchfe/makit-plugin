@@ -85,7 +85,7 @@ export class MakeProcess {
             stdout.bottom(this.dashboard());
         }
         else if (graph) {
-            stdout.log(`[${this.workStatus}] ` + graph.getSinglePath(target).reverse().join(' -> '));
+            stdout.log(`[${this.workStatus}] ` + graph.findPathToRoot(target).reverse().join(' -> '));
         }
     }
     skipHandler({target, parent, graph}) {
@@ -98,7 +98,7 @@ export class MakeProcess {
             stdout.bottom(this.dashboard());
         }
         else if (graph) {
-            stdout.log(`[${this.workStatus}] ` + graph.getSinglePath(target).reverse().join(' -> '));
+            stdout.log(`[${this.workStatus}] ` + graph.findPathToRoot(target).reverse().join(' -> '));
         }
     }
     cal() {
@@ -149,7 +149,7 @@ export class MakeProcess {
         if (!this.graph) {
             return '';
         }
-        let tree: string[] = this.graph.getSinglePath(this.currentTarget) as string[];
+        let tree: string[] = this.graph.findPathToRoot(this.currentTarget) as string[];
         tree.reverse();
         tree = tree.map((str, index) => {
             const newStr = str.replace(cwd + '/', '');
