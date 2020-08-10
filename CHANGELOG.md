@@ -1,3 +1,10 @@
+## [1.10.2](https://github.com/searchfe/makit-plugin/compare/v1.10.1...v1.10.2) (2020-08-10)
+
+
+### Bug Fixes
+
+* upgrade makit to 1.16.1 ([fbcc240](https://github.com/searchfe/makit-plugin/commit/fbcc240b73717c7151ba43feffcb371f65c6e353))
+
 ## [1.10.1](https://github.com/searchfe/makit-plugin/compare/v1.10.0...v1.10.1) (2020-08-10)
 
 
