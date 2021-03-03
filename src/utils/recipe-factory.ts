@@ -22,6 +22,7 @@ export function recipeFactory<O, C>(recipeImpl: RecipeImpl<O, C>, options: O = {
                 'target': context.targetPath(),
                 'dep': context.dependencyPath(),
                 'make': context.make.bind(context),
+                'logger': context.logger,
                 ...(makeOptions(matchKeys, options, context) as any)
             }, conf);
         };
@@ -32,6 +33,7 @@ export function recipeFactory<O, C>(recipeImpl: RecipeImpl<O, C>, options: O = {
             'target': context.targetPath(),
             'dep': context.dependencyPath(),
             'make': context.make.bind(context),
+            'logger': context.logger,
             ...(makeOptions(matchKeys, options, context) as any)
         }, conf, done);
     };
@@ -56,6 +58,7 @@ export type RecipeImpl<Option, Config> = (options: Option & RecipeImplOption, co
 interface RecipeImplOption {
     target: string
     dep: string
+    logger: Context['logger']
     make: (target: string) => Promise<number>
 }
 
