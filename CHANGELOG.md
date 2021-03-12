@@ -1,3 +1,10 @@
+## [1.10.3](https://github.com/searchfe/makit-plugin/compare/v1.10.2...v1.10.3) (2021-03-12)
+
+
+### Bug Fixes
+
+* amd-uri 解析一行内出现多个 __getAmdUri 时匹配错误 ([b2baef6](https://github.com/searchfe/makit-plugin/commit/b2baef6e41148a5fbefc9f7afd8636b454460bb2))
+
 ## [1.10.2](https://github.com/searchfe/makit-plugin/compare/v1.10.1...v1.10.2) (2020-08-10)
 
 
