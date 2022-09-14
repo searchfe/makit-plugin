@@ -39,6 +39,22 @@ export const ts2phpPreBuild: RecipeImpl<Ts2phpPreBuildRecipeOptions, undefined> 
     outputFileSync(target, newCode);
 };
 
+type SanPreBuildRecipeOptions = {
+    // SanProject，但此代码库san-ssr版本较低，类型不匹配
+    project: any;
+} & Ts2phpPreBuildRecipeOptions;
+
+export const sanPreBuild: RecipeImpl<SanPreBuildRecipeOptions, undefined> = async ({
+    project, target, dep, srcRoot, buildRoot, make, staticDomain, env, srcAppDir, buildAppDir}) => {
+    const ssrTarget = env.SSR_TARGET;
+
+    // 依赖分析： html, lib  macro
+    let newCode = await analyzeTsDepsAndReplace(make, dep, srcRoot, buildRoot, srcAppDir, buildAppDir, staticDomain, ssrTarget);
+    newCode = replaceEnv(newCode, env);
+    outputFileSync(target, newCode);
+    outputFileSync(target, project.compileToSource(target));
+};
+
 interface Ts2phpRecipeOptions {
     options: any
 }
