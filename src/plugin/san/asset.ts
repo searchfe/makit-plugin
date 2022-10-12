@@ -1,7 +1,8 @@
 import { readFileSync } from "fs";
 import { extname } from "path";
 
-export function makeAsset(name: string, file: string, assetPath: string, loadType: 'img' | 'script' | 'style' | 'scriptLink' | 'styleLink', inlineCode = true) {
+type LoaderType = 'img' | 'script' | 'style' | 'scriptLink' | 'styleLink';
+export function makeAsset(name: string, file: string, assetPath: string, loadType: LoaderType, inlineCode = true) {
     const conf = JSON.parse(readFileSync(`${assetPath}.md5`).toString());
     const buf = readFileSync(assetPath);
     let content: string = '';
