@@ -1,7 +1,7 @@
 import { readFileSync } from "fs";
 import { extname } from "path";
 
-export function makeAsset(name: string, file: string, assetPath: string, loadType: 'img' | 'script' | 'style') {
+export function makeAsset(name: string, file: string, assetPath: string, loadType: 'img' | 'script' | 'style' | 'scriptLink' | 'styleLink', inlineCode = true) {
     const conf = JSON.parse(readFileSync(`${assetPath}.md5`).toString());
     const buf = readFileSync(assetPath);
     let content: string = '';
@@ -9,12 +9,13 @@ export function makeAsset(name: string, file: string, assetPath: string, loadTyp
         const prefix = 'data:image/' + extname(assetPath).substring(1) + ';base64,';
         content = `url(${prefix}${buf.toString('base64')})`;
     } else {
-        content = JSON.stringify(buf.toString());
+        content = inlineCode ? JSON.stringify(buf.toString()) : '\'\'';
     }
     let type = 'img';
-    if (loadType === 'script') {
+    if (loadType === 'script' || loadType === 'scriptLink') {
         type = 'js';
-    } else if (loadType === 'style') {
+    }
+    else if (loadType === 'style' || loadType === 'styleLink') {
         type = 'css';
     }
     const tmpPath = assetPath.split('/');
