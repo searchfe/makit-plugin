@@ -114,6 +114,12 @@ async function analyzeTsFile(
                 case 'script':
                     await make(depPath);
                     return makeAsset(key, filePath, depPath, loaderType);
+                case 'styleLink':
+                    await make(depPath);
+                    return makeAsset(key, filePath, depPath, loaderType, false);
+                case 'scriptLink':
+                    await make(depPath);
+                    return makeAsset(key, filePath, depPath, loaderType, false);
                 case 'img':
                     await make(depPath);
                     return makeAsset(key, filePath, depPath, loaderType);
