@@ -39,7 +39,7 @@
     "@typescript-eslint/eslint-plugin": "^2.3.0",
     "@typescript-eslint/parser": "^2.3.0",
     "chai": "^4.1.2",
-    "commitizen": "^3.1.1",
+    "commitizen": "^4.3.0",
     "coveralls": "^3.0.2",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^5.16.0",
